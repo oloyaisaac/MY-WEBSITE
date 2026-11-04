@@ -60,6 +60,17 @@ Two consequences worth being explicit about:
 2. **Context is not a free pass.** Some strings are only sensitive in context. Where a string is genuinely
    ambiguous it belongs in `corpus/ambiguous.jsonl`, which is excluded from scoring by default.
 
+### The ambiguous set
+
+Ten cases are quarantined there: a bare 40-character hex string, a MongoDB ObjectId, an unlabelled person's name,
+AWS's published example key, the jwt.io demo token, a documentation placeholder address, `1.2.3.4` used as a
+version number, nine bare digits, and a twelve-digit reference number. Every one has a defensible answer in both
+directions, so scoring them would reward whichever convention the corpus author happened to pick.
+
+They are still useful: run `node bench/run.mjs --include-ambiguous` to see how a detector behaves on genuinely
+undecidable input. The reference implementation flags 7 of the 10 — it errs toward over-redaction when a string is
+indistinguishable from a secret, which is the right failure mode for a redactor and the wrong one for a linter.
+
 ## Metrics
 
 For one case: marked spans are matched one-to-one against findings, greedily by largest overlap.
