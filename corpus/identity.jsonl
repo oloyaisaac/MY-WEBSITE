@@ -1,0 +1,12 @@
+{"id":"ssn/dashed","cat":"identity","text":"SSN 123-45-6789 on the onboarding form","expect":["123-45-6789"]}
+{"id":"ssn/spaced","cat":"identity","text":"social security number 123 45 6789 filed last year","expect":["123 45 6789"]}
+{"id":"ssn/in-prose","cat":"identity","text":"his SSN is 219-09-9999 and it has not changed","expect":["219-09-9999"]}
+{"id":"ein/standard","cat":"identity","text":"EIN 12-3456789 is on the W-9","expect":["12-3456789"]}
+{"id":"ssn/and-ein","cat":"identity","text":"employer 45-6789012, employee 078-05-1120","expect":["45-6789012","078-05-1120"]}
+{"id":"neg/ssn-zeros","cat":"identity","text":"placeholder 000-00-0000 means the field was never set","expect":[]}
+{"id":"neg/ssn-666","cat":"identity","text":"666-12-3456 is not a real area number","expect":[]}
+{"id":"neg/ssn-900","cat":"identity","text":"900-12-3456 is reserved and cannot be issued","expect":[]}
+{"id":"neg/date-slashes","cat":"identity","text":"filed on 04/11/2025 at 09:12","expect":[]}
+{"id":"neg/phone-vs-ssn","cat":"identity","text":"call 555-0132 if the form fails","expect":[]}
+{"id":"neg/isbn-13","cat":"identity","text":"978-3-16-148410-0","expect":[]}
+{"id":"neg/decimal-math","cat":"identity","text":"12-34 = -22 and 45 - 67 = -22 as well","expect":[]}

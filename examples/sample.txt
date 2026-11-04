@@ -1,0 +1,11 @@
+Support ticket 4471 — all values below are fake
+
+Hey, our payment keeps failing. Card 4111 1111 1111 1111, exp 08/27.
+Email me at grace.achieng@acme-logistics.co.ug or call +256 772 123 456.
+
+Server this is happening on: 10.20.30.41 (mac 00:1A:2B:3C:4D:5E)
+aws_access_key_id = AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+db: postgres://etl:Pr0d%21Passw0rd@db-01.internal:5432/warehouse
+
+Refund IBAN: GB82 WEST 1234 5698 7654 32

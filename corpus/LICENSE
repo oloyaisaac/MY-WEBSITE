@@ -1,0 +1,14 @@
+The case files in this directory (corpus/*.jsonl) are dedicated to the public domain
+under CC0 1.0 Universal.
+
+To the extent possible under law, the authors have waived all copyright and related
+or neighbouring rights to this corpus.
+
+You may copy, modify, distribute and use these cases, including for commercial
+purposes and for training or evaluating models, without asking permission and
+without attribution.
+
+Full text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Note: every identifier in these files is synthetic. Do not add real personal data,
+real credentials or real card numbers to this corpus.

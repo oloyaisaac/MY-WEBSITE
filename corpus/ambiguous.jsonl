@@ -1,0 +1,10 @@
+{"id":"hex/bare-40","cat":"none","text":"9f2c8a1b7d3e5f6a8b9c0d1e2f3a4b5c6d7e8f90","expect":[],"note":"40 hex chars: could be a git sha, an object id or an AWS secret. No context means no defensible answer."}
+{"id":"hex/object-id","cat":"none","text":"_id: 507f1f77bcf86cd799439011","expect":[],"note":"MongoDB ObjectId — an identifier, but indistinguishable from a random 24-hex secret."}
+{"id":"digits/12-unseparated","cat":"none","text":"reference 123456789012 appears on the receipt","expect":[],"note":"Could be an Aadhaar number, an account number or a document id."}
+{"id":"name/in-prose","cat":"none","text":"Grace Achieng reviewed the proposal on Tuesday.","expect":[],"note":"A person's name with no title or context. Only phrase-level NER can catch this."}
+{"id":"name/company","cat":"none","text":"Acme Logistics Uganda Limited is the counterparty.","expect":[],"note":"Organisations are often sensitive commercially, rarely treated as PII."}
+{"id":"email/example-domain","cat":"none","text":"for example jane.doe@example.com is used throughout the docs","expect":[],"note":"A documentation placeholder that happens to be a valid address."}
+{"id":"phone/9-bare-digits","cat":"none","text":"order 772123456 was placed at 09:14","expect":[],"note":"Nine bare digits: a phone number in some countries, an order id in most."}
+{"id":"ipv4/version-like","cat":"none","text":"model 1.2.3.4 was deprecated in favour of 1.2.5.0","expect":[],"note":"Valid IPv4 dotted quads used as version numbers."}
+{"id":"key/aws-docs-example","cat":"none","text":"AKIAIOSFODNN7EXAMPLE is the key printed in the AWS docs","expect":[],"note":"AWS's published example key: shape-valid, harmless."}
+{"id":"jwt/example-token","cat":"none","text":"paste eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U from jwt.io","expect":[],"note":"The canonical jwt.io demo token."}
