@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>standin — redact before you paste, restore when the answer comes back</title>
+    <meta
+      name="description"
+      content="standin strips emails, API keys, card numbers and IPs out of text before you hand it to an LLM — then puts the real values back into the model's reply. Runs entirely in your browser. MIT licensed."
+    />
+    <meta name="theme-color" content="#08090b" />
+    <meta property="og:title" content="standin — reversible redaction for LLM prompts" />
+    <meta
+      property="og:description"
+      content="Paste anything. Get a scrubbed version with placeholders, ask your model, then restore the real values locally. No uploads, no keys, no server."
+    />
+    <meta property="og:type" content="website" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0d10'/%3E%3Cpath d='M8 12h11l-3-3M24 20H13l3 3' stroke='%2354f0b8' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <header class="top">
+      <a class="brand" href="./index.html">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 9h13l-3.2-3.2" />
+            <path d="M20 15H7l3.2 3.2" />
+          </svg>
+        </span>
+        <span class="brand-name">standin</span>
+        <span class="ver">v0.1.0</span>
+      </a>
+      <nav class="top-nav">
+        <a href="#tool">Tool</a>
+        <a href="#how">How it works</a>
+        <a href="#cli">CLI</a>
+        <a class="gh" href="https://github.com/oloyaisaac/MY-WEBSITE" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>
+            Redact before you paste.<br />
+            <em>Restore</em> when the answer comes back.
+          </h1>
+          <p>
+            You are about to paste a log line, an invoice, a customer email, a config file. standin swaps the
+            sensitive parts for stable placeholders — then puts the real values back into whatever the model replies.
+            Everything happens in this tab.
+          </p>
+          <ul class="pill-row">
+            <li><span class="dot live"></span> runs on your device</li>
+            <li>no uploads</li>
+            <li>no API keys</li>
+            <li>MIT licensed</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <div class="mini">
+            <span class="mini-label">you paste</span>
+            <pre>charge card 4111 1111 1111 1111
+for a.mensah@example.co.ug</pre>
+          </div>
+          <div class="mini-arrow" aria-hidden="true">↓</div>
+          <div class="mini">
+            <span class="mini-label">model sees</span>
+            <pre>charge card <b>[CARD_1]</b>
+for <b>[EMAIL_1]</b></pre>
+          </div>
+          <div class="mini-arrow" aria-hidden="true">↓</div>
+          <div class="mini">
+            <span class="mini-label">you get back</span>
+            <pre>charged card <b>…1111</b>
+for <b>a.mensah@…</b></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="tool" id="tool">
+        <div class="tool-bar">
+          <div class="seg" role="tablist" aria-label="Output view">
+            <button class="seg-btn is-active" data-tab="redacted" role="tab" aria-selected="true">Redacted</button>
+            <button class="seg-btn" data-tab="restore" role="tab" aria-selected="false">Restore reply</button>
+            <button class="seg-btn" data-tab="vault" role="tab" aria-selected="false">Vault <span class="count" id="vault-count">0</span></button>
+          </div>
+          <div class="tool-bar-right">
+            <label class="switch">
+              <input type="checkbox" id="opt-experimental" />
+              <span>names &amp; addresses</span>
+              <span class="tag-exp">experimental</span>
+            </label>
+            <label class="swap">
+              <span>placeholders</span>
+              <select id="opt-mask">
+                <option value="bracket">[EMAIL_1]</option>
+                <option value="brace">{{EMAIL_1}}</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="workspace">
+          <!-- input -->
+          <div class="pane pane-in">
+            <div class="pane-head">
+              <h2>Input</h2>
+              <div class="pane-actions">
+                <button class="btn ghost" id="btn-sample" type="button">Load sample</button>
+                <button class="btn ghost" id="btn-clear" type="button">Clear</button>
+              </div>
+            </div>
+            <textarea
+              id="input"
+              class="editor"
+              spellcheck="false"
+              placeholder="Paste an email, a stack trace, a CSV row, a customer ticket, a .env file — anything you were about to hand to ChatGPT, Claude or Gemini."
+              aria-label="Text to redact"
+            ></textarea>
+            <div class="pane-foot">
+              <span id="stat-chars">0 chars</span>
+              <span class="sep">·</span>
+              <span id="stat-found">nothing to hide yet</span>
+              <span class="grow"></span>
+              <span id="stat-scan" class="scan-flag">scanned locally</span>
+            </div>
+          </div>
+
+          <!-- output -->
+          <div class="pane pane-out">
+            <div class="pane-head">
+              <h2 id="out-title">Safe to paste</h2>
+              <div class="pane-actions">
+                <button class="btn ghost" id="btn-copy" type="button">Copy</button>
+                <button class="btn ghost" id="btn-download" type="button">Download</button>
+              </div>
+            </div>
+
+            <div class="tab-panel is-active" data-panel="redacted">
+              <pre id="output" class="out" aria-live="polite"><span class="empty">Your scrubbed text lands here.</span></pre>
+            </div>
+
+            <div class="tab-panel" data-panel="restore">
+              <label class="mini-label" for="answer">Paste the model's reply</label>
+              <textarea id="answer" class="editor short" spellcheck="false" placeholder="Paste your model's answer here. Any [EMAIL_1] / [CARD_2] placeholders are swapped back for the real values."></textarea>
+              <div class="restore-out-wrap">
+                <div class="restore-head">
+                  <span class="mini-label">restored locally</span>
+                  <div class="pane-actions">
+                    <button class="btn ghost" id="btn-sample-reply" type="button">Sample reply</button>
+                    <button class="btn ghost" id="btn-copy-restored" type="button">Copy</button>
+                  </div>
+                </div>
+                <pre id="restored" class="out short"><span class="empty">Nothing to restore yet.</span></pre>
+              </div>
+            </div>
+
+            <div class="tab-panel" data-panel="vault">
+              <div class="vault-head">
+                <p class="vault-note">This table is the key to the placeholders. It never leaves your device — keep it if you want to restore answers later.</p>
+                <div class="pane-actions">
+                  <button class="btn ghost" id="btn-blur" type="button" aria-pressed="false">Blur values</button>
+                  <button class="btn ghost" id="btn-vault-json" type="button">Export .json</button>
+                </div>
+              </div>
+              <div id="vault-list" class="vault-list">
+                <p class="empty pad">No placeholders yet.</p>
+              </div>
+            </div>
+
+            <div class="pane-foot">
+              <span id="out-note">Nothing has left this page.</span>
+              <span class="grow"></span>
+              <span class="kbd-hint"><kbd>⌘</kbd><kbd>↵</kbd> re-scan</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="findings">
+          <div class="findings-head">
+            <h2>What we found</h2>
+            <div class="chips" id="cat-chips" role="group" aria-label="Filter by category"></div>
+          </div>
+          <div id="findings" class="findings-grid">
+            <p class="empty pad">Nothing scanned yet. Paste something on the left — or load the sample.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="how" id="how">
+        <h2 class="section-title">Why reversible matters</h2>
+        <div class="cards">
+          <article class="card">
+            <span class="card-num">01</span>
+            <h3>One-way redaction breaks the work</h3>
+            <p>
+              Scrub a customer email, ask “draft a reply”, and the model answers about
+              <code>[EMAIL_1]</code>. Now you are hand-copying values back out of a spreadsheet. standin keeps the
+              mapping so the reply is written to the real person, not to a placeholder.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-num">02</span>
+            <h3>Placeholders stay consistent</h3>
+            <p>
+              The same email is always <code>[EMAIL_1]</code>, so the model can reason about
+              “the same customer” across a long thread. New values get new numbers, and existing ones never shift.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-num">03</span>
+            <h3>Nothing is stored, sent or logged</h3>
+            <p>
+              No backend, no analytics, no third-party script, no “sign in to continue”. The page is static files and
+              one JavaScript module — you can read all of it, or run it offline from a USB stick.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cli" id="cli">
+        <div class="cli-copy">
+          <h2 class="section-title">Same engine, in your terminal</h2>
+          <p>
+            The browser app is a thin shell over <code>src/standin.js</code>. The same rules run in Node with no
+            dependencies, so you can scrub a log before pasting it — or wire it into a pipeline.
+          </p>
+          <p class="muted">
+            Verified detectors: Luhn for card numbers, mod-97 for IBANs, entropy + context checks for keys, and
+            format-specific matchers for AWS, GitHub, Slack, Google, Stripe, JWTs and private keys.
+          </p>
+        </div>
+        <pre class="code"><span class="c"># scrub a file, keep the mapping</span>
+npx standin support-ticket.txt --vault vault.json
+
+<span class="c"># paste the scrubbed text into your model, then put values back</span>
+npx standin reply.md --restore vault.json
+
+<span class="c"># pipe it, or fail CI if something sensitive slips in</span>
+git diff | npx standin --check</pre>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2 class="section-title">Reasonable questions</h2>
+        <details open>
+          <summary>Does this stop me from sending data to an AI provider?</summary>
+          <p>
+            No — you still choose what to send. standin reduces what the provider sees: it removes the identifiers
+            that make text personal or dangerous to leak, and keeps enough structure for the model to do the work.
+            You paste the scrubbed text into your model yourself.
+          </p>
+        </details>
+        <details>
+          <summary>Is this a compliance tool?</summary>
+          <p>
+            No. It is a careful pattern-and-checksum filter, not a data-loss-prevention product or a lawyer. It can
+            miss context-dependent identifiers (unlabelled names, unusual ID formats) and it can over-redact.
+            Read the diff before you send.
+          </p>
+        </details>
+        <details>
+          <summary>What about names, addresses and other free-text PII?</summary>
+          <p>
+            Those need language understanding, so they are behind an “experimental” switch and use conservative
+            context patterns (“Regards, …”, “12 Kimball Street”). Expect misses; the toggle is off by default on
+            purpose.
+          </p>
+        </details>
+        <details>
+          <summary>Can I use it as a library?</summary>
+          <p>
+            Yes: <code>import { redact, restore } from './src/standin.js'</code>. <code>redact()</code> returns
+            <code>{ text, vault }</code>; <code>restore(text, vault)</code> puts the real values back. MIT licensed,
+            no dependencies, works in browsers and Node 18+.
+          </p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div>
+        <span class="brand-name">standin</span>
+        <span class="muted">— reversible redaction for text you hand to a model.</span>
+      </div>
+      <div class="foot-links">
+        <a href="https://github.com/oloyaisaac/MY-WEBSITE">Source</a>
+        <a href="https://github.com/oloyaisaac/MY-WEBSITE/blob/main/LICENSE">MIT</a>
+        <span class="muted">v0.1.0</span>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

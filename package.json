@@ -1,0 +1,38 @@
+{
+  "name": "standin",
+  "version": "0.1.0",
+  "description": "Reversible redaction for text you hand to an LLM. Runs 100% on your device — paste, scrub, ask, restore.",
+  "type": "module",
+  "main": "src/standin.js",
+  "exports": {
+    ".": "./src/standin.js"
+  },
+  "bin": {
+    "standin": "bin/standin.mjs"
+  },
+  "files": [
+    "src/standin.js",
+    "bin/standin.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/",
+    "dev": "node scripts/serve.mjs",
+    "sample": "node bin/standin.mjs examples/sample.txt"
+  },
+  "keywords": [
+    "redaction",
+    "pii",
+    "privacy",
+    "llm",
+    "prompt",
+    "secrets",
+    "anonymize",
+    "local-first"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
