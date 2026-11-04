@@ -1,0 +1,18 @@
+{"id":"ipv4/public","cat":"network","text":"the rate limiter banned 203.0.113.42 last night","expect":["203.0.113.42"]}
+{"id":"ipv4/private","cat":"network","text":"[ERROR] host: 10.20.30.41 unreachable","expect":["10.20.30.41"]}
+{"id":"ipv4/in-url","cat":"network","text":"admin panel at http://192.168.1.10:8080/admin is down","expect":["192.168.1.10"]}
+{"id":"ipv4/log-line","cat":"network","text":"2025-11-02T02:14:07Z WARN connection reset by 198.51.100.7","expect":["198.51.100.7"]}
+{"id":"ipv6/full","cat":"network","text":"the tunnel peer is 2001:0db8:85a3:0000:0000:8a2e:0370:7334","expect":["2001:0db8:85a3:0000:0000:8a2e:0370:7334"]}
+{"id":"ipv6/compressed","cat":"network","text":"link-local fe80::1ff:fe23:4567:890a answered the probe","expect":["fe80::1ff:fe23:4567:890a"]}
+{"id":"mac/colon","cat":"network","text":"[ERROR] mac: 00:1A:2B:3C:4D:5E rejected by the switch","expect":["00:1A:2B:3C:4D:5E"]}
+{"id":"mac/dash","cat":"network","text":"device 00-1a-2b-3c-4d-5e joined the vlan","expect":["00-1a-2b-3c-4d-5e"]}
+{"id":"url/token-param","cat":"network","text":"POST https://api.acme.co.ug/v1/upload?token=9f2c8a1b7d3e5f6a8b9c0d1e2f3a4b5c","expect":["https://api.acme.co.ug/v1/upload?token=9f2c8a1b7d3e5f6a8b9c0d1e2f3a4b5c"]}
+{"id":"url/key-param","cat":"network","text":"CDN url https://cdn.acme.co.ug/img/hero.png?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY","expect":["https://cdn.acme.co.ug/img/hero.png?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY"]}
+{"id":"url/signed","cat":"network","text":"presigned link https://s3.acme.co.ug/report.pdf?sig=8f2c91ab74d3e5f6a8b9c0d1e2f3a4b5c&expires=1730712911","expect":["https://s3.acme.co.ug/report.pdf?sig=8f2c91ab74d3e5f6a8b9c0d1e2f3a4b5c&expires=1730712911"]}
+{"id":"neg/loopback","cat":"network","text":"the dev server listens on 127.0.0.1:3000 only","expect":[]}
+{"id":"neg/unspecified","cat":"network","text":"bind to 0.0.0.0 in production, not 255.255.255.255","expect":[]}
+{"id":"neg/semver","cat":"network","text":"upgrade from node 20.11.0 to 22.1.0 before the release","expect":[]}
+{"id":"neg/hex-colors","cat":"network","text":"palette: #0A0B0D, #54F0B8, #FF7A7A and rgba(0,0,0,0.4)","expect":[]}
+{"id":"neg/plain-url","cat":"network","text":"docs live at https://acme.co.ug/docs/getting-started?page=2&sort=asc","expect":[]}
+{"id":"neg/http-status","cat":"network","text":"GET /api/v1/orders/8842 200 34ms 1841 bytes","expect":[]}
+{"id":"neg/timestamp-range","cat":"network","text":"window 2025-11-02 02:00 to 2025-11-02 04:00 UTC","expect":[]}

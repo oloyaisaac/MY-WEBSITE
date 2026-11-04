@@ -13,6 +13,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm test
+
+      - name: Engine tests and corpus integrity
+        run: npm test
+
+      - name: Benchmark regression gate
+        run: node bench/run.mjs --min-precision 0.95 --min-recall 0.9
+
+      - name: The naive baseline must stay beatable
+        run: node bench/run.mjs --detector bench/adapters/naive.mjs --json > naive.json && node -e "
+          const r = require('./naive.json');
+          if (r.overall.precision > 0.9) { console.error('naive baseline scored too well - is the corpus too easy?'); process.exit(1); }
+          "
+
       - name: CLI smoke test
         run: node bin/standin.mjs examples/sample.txt --quiet | grep -q '\[CARD_1\]'

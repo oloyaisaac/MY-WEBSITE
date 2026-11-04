@@ -1,0 +1,35 @@
+{"id":"git/long-sha","cat":"none","text":"commit 9f2c8a1b7d3e5f6a8b9c0d1e2f3a4b5c6d7e8f90 was pushed to main","expect":[]}
+{"id":"git/short-sha","cat":"none","text":"see 9f2c8a1 for the fix","expect":[]}
+{"id":"git/log-lines","cat":"none","text":"9f2c8a1 (HEAD -> main) chore: bump deps\n1b4e7d2 fix: guard against empty payload","expect":[]}
+{"id":"uuid/v4","cat":"none","text":"request id 550e8400-e29b-41d4-a716-446655440000 in the header","expect":[]}
+{"id":"hash/md5","cat":"none","text":"md5 5d41402abc4b2a76b9719d911017c592 matches the archive","expect":[]}
+{"id":"hash/sha1-bare","cat":"none","text":"the etag is da39a3ee5e6b4b0d3255bfef95601890afd80709","expect":[]}
+{"id":"data-uri/base64-png","cat":"none","text":"background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==)","expect":[]}
+{"id":"docker/digest","cat":"none","text":"image node@sha256:9f2c8a1b7d3e5f6a8b9c0d1e2f3a4b5c6d7e8f901a2b3c4d5e6f708192a3b4c5","expect":[]}
+{"id":"jwt/broken-two-parts","cat":"none","text":"eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjQ0NzF9 is a truncated token","expect":[]}
+{"id":"code/sql-placeholders","cat":"none","text":"SELECT * FROM orders WHERE id = $1 AND created_at > $2 LIMIT 50","expect":[]}
+{"id":"code/js-numbers","cat":"none","text":"const total = items.reduce((a, b) => a + b.price * b.qty, 0) / 1.2;","expect":[]}
+{"id":"paths/unix","cat":"none","text":"module not found: /usr/local/lib/node_modules/@acme/core/dist/index.js","expect":[]}
+{"id":"paths/windows","cat":"none","text":"cannot open C:\\Users\\grace\\Documents\\reports\\q4.xlsx","expect":[]}
+{"id":"stack-trace","cat":"none","text":"TypeError: Cannot read properties of undefined (reading 'id')\n    at parseOrder (/srv/app/src/order.js:42:17)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","expect":[]}
+{"id":"prose/dates-and-money","cat":"none","text":"On 12 March 2024 the team shipped 17 fixes; revenue rose 23% to $1.4M against a $1.2M plan.","expect":[]}
+{"id":"prose/statistics","cat":"none","text":"accuracy 87.3% (n=1,284), p<0.05 across 5 seeds, 2.1T tokens","expect":[]}
+{"id":"science/notation","cat":"none","text":"k = 1.38e-23 J/K and E = mc^2 both appear in the appendix","expect":[]}
+{"id":"coords","cat":"none","text":"the site sits at 0.3476 S, 32.5825 E near Kampala","expect":[]}
+{"id":"cron","cat":"none","text":"schedule: */5 * * * * runs the export every five minutes","expect":[]}
+{"id":"semver","cat":"none","text":"peer deps: react >=18.2.0 <20.0.0, typescript ^5.4.2","expect":[]}
+{"id":"time-of-day","cat":"none","text":"the job starts at 02:14:07 and finishes around 02:31:44","expect":[]}
+{"id":"html/inline","cat":"none","text":"<div class=\"card\" style=\"border-radius: 14px; padding: 20px\">Pay now</div>","expect":[]}
+{"id":"markdown/table","cat":"none","text":"| plan | price | seats |\n| --- | --- | --- |\n| pro | 29 | 10 |","expect":[]}
+{"id":"unicode/emoji","cat":"none","text":"shipped it 🚀 — 3 countries, 2 timezones, 12 people, 0 regrets","expect":[]}
+{"id":"sku/alphanumeric","cat":"none","text":"ACME-XR500-BLK and ACME-XR500-WHT are both back in stock","expect":[]}
+{"id":"swahili/prose","cat":"none","text":"Tunafanya kazi kwa bidii kila siku ili kuhakikisha huduma bora kwa wateja wetu wote.","expect":[]}
+{"id":"apa/citation","cat":"none","text":"Vaswani et al. (2017) show that attention is all you need (pp. 5998-6008).","expect":[]}
+{"id":"math/equation","cat":"none","text":"solve 3x + 7 = 22 for x, then verify with x = 5","expect":[]}
+{"id":"html/entity","cat":"none","text":"Tom &amp; Jerry&#39;s caf&#233; opens at 8","expect":[]}
+{"id":"container/ports","cat":"none","text":"docker run -p 8080:8080 -p 5432:5432 acme/api:1.4.2","expect":[]}
+{"id":"ipv4/three-parts","cat":"none","text":"section 4.2.1 of the spec covers retries","expect":[]}
+{"id":"base64/word-long","cat":"none","text":"Counterrevolutionaries and antidisestablishmentarianism are long words","expect":[]}
+{"id":"csv/numbers","cat":"none","text":"week,visits,conversions\n1,10432,318\n2,11871,402","expect":[]}
+{"id":"json/config","cat":"none","text":"{\"port\": 3000, \"retries\": 3, \"timeout_ms\": 15000, \"log_level\": \"info\"}","expect":[]}
+{"id":"legal/section-refs","cat":"none","text":"Pursuant to section 12(3)(b) and regulation 45.2, notice is hereby given.","expect":[]}

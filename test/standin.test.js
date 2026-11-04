@@ -126,3 +126,32 @@ test('does not touch ordinary prose or version numbers', () => {
   const prose = 'The quick brown fox jumps over the lazy dog, repeatedly and with great enthusiasm.';
   assert.equal(scrub(prose), prose);
 });
+
+/* --- regressions found by the public corpus (bench/run.mjs) --- */
+
+test('IBANs are matched regardless of case', () => {
+  assert.match(scrub('account gb82 west 1234 5698 7654 32'), /\[IBAN_1\]/);
+  assert.match(scrub('account de89370400440532013000'), /\[IBAN_1\]/);
+});
+
+test('hex hashes and object ids are not treated as secrets', () => {
+  const md5 = 'md5 5d41402abc4b2a76b9719d911017c592 matches the archive';
+  const sha256 = 'sha256:9f2c8a1b7d3e5f6a8b9c0d1e2f3a4b5c6d7e8f901a2b3c4d5e6f708192a3b4c5';
+  const objectId = '_id: 507f1f77bcf86cd799439011';
+  assert.equal(scrub(md5), md5);
+  assert.equal(scrub(sha256), sha256);
+  assert.equal(scrub(objectId), objectId);
+  // …unless the surrounding words say it is a secret
+  assert.match(scrub('secret: 5d41402abc4b2a76b9719d911017c592'), /\[SECRET_1\]/);
+});
+
+test('SSN-shaped and all-zero numbers are not phone numbers', () => {
+  assert.equal(scrub('placeholder 000-00-0000 means unset'), 'placeholder 000-00-0000 means unset');
+  assert.equal(scrub('666-12-3456 is not issued'), '666-12-3456 is not issued');
+  assert.match(scrub('employee 123-45-6789'), /\[SSN_1\]/);
+});
+
+test('timestamps and ISO datetimes are not phone numbers', () => {
+  const text = 'window 2025-11-02 02:00 to 2025-11-02 04:00 UTC';
+  assert.equal(scrub(text), text);
+});

@@ -9,7 +9,7 @@
  *   standin notes.md --check              exit 1 if anything was found
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { scan, restore } from '../src/standin.js';
+import { scan, restore, VERSION } from '../src/standin.js';
 
 const HELP = `standin — reversible redaction for text you hand to an LLM
 
@@ -151,7 +151,7 @@ try {
     process.stdout.write(
       JSON.stringify(
         {
-          version: '0.1.0',
+          version: VERSION,
           files: results.map(({ name, result }) => ({
             name,
             total: result.total,
@@ -182,7 +182,7 @@ try {
       JSON.stringify(
         {
           tool: 'standin',
-          version: '0.1.0',
+          version: VERSION,
           createdAt: new Date().toISOString(),
           note: 'Keep this file private. It maps placeholders back to the original values.',
           vault: sharedVault,

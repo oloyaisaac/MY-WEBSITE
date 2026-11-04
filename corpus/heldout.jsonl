@@ -1,0 +1,30 @@
+{"id": "held/email-long-tld", "cat": "contact", "text": "write to grace@acme.technology if the portal is down", "expect": ["grace@acme.technology"], "split": "test"}
+{"id": "held/email-underscore", "cat": "contact", "text": "first_last@acme-logistics.co.ug handles refunds", "expect": ["first_last@acme-logistics.co.ug"], "split": "test"}
+{"id": "held/phone-dots", "cat": "contact", "text": "call 0772.123.456 after lunch", "expect": ["0772.123.456"], "split": "test"}
+{"id": "held/phone-extension", "cat": "contact", "text": "switchboard 020 7946 0958 ext. 442", "expect": ["020 7946 0958"], "split": "test"}
+{"id": "held/phone-nigeria", "cat": "contact", "text": "Lagos line +234 802 123 4567", "expect": ["+234 802 123 4567"], "split": "test"}
+{"id": "held/phone-uk-mobile", "cat": "contact", "text": "text 07700 900123 when you land", "expect": ["07700 900123"], "split": "test"}
+{"id": "held/card-amex-spaced", "cat": "finance", "text": "amex 3782 822463 10005 on the corporate account", "expect": ["3782 822463 10005"], "split": "test"}
+{"id": "held/card-query-param", "cat": "finance", "text": "checkout url https://pay.acme.co.ug/checkout?pan=4111111111111111&exp=0827", "expect": ["4111111111111111"], "split": "test"}
+{"id": "held/iban-compact-lower", "cat": "finance", "text": "account de89370400440532013000 in Frankfurt", "expect": ["de89370400440532013000"], "split": "test"}
+{"id": "held/azure-account-key", "cat": "secrets", "text": "DefaultEndpointsProtocol=https;AccountName=acmestore;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==", "expect": ["Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=="], "split": "test"}
+{"id": "held/github-oauth", "cat": "secrets", "text": "gho_16C7e42F292c6912E7710c838347Ae178B4a was issued to the CLI", "expect": ["gho_16C7e42F292c6912E7710c838347Ae178B4a"], "split": "test"}
+{"id": "held/openai-in-comment", "cat": "secrets", "text": "# key: sk-proj-9xK2mQ7vLp3RtY8bN4cD6fG1hJ5kM0sV", "expect": ["sk-proj-9xK2mQ7vLp3RtY8bN4cD6fG1hJ5kM0sV"], "split": "test"}
+{"id": "held/jwt-url-fragment", "cat": "secrets", "text": "https://app.acme.co.ug/#access_token=eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjF9.abc123def456ghi789jkl", "expect": ["eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjF9.abc123def456ghi789jkl"], "split": "test"}
+{"id": "held/ipv6-zone", "cat": "network", "text": "probe fe80::1%eth0 returned unreachable", "expect": ["fe80::1"], "split": "test"}
+{"id": "held/mac-uppercase-dash", "cat": "network", "text": "NIC 00-1A-2B-3C-4D-5E is on vlan 40", "expect": ["00-1A-2B-3C-4D-5E"], "split": "test"}
+{"id": "held/ssn-in-prose", "cat": "identity", "text": "her social security number is 402-11-8890", "expect": ["402-11-8890"], "split": "test"}
+{"id": "held/ein-labelled", "cat": "identity", "text": "Federal EIN: 84-1928374 for the new entity", "expect": ["84-1928374"], "split": "test"}
+{"id": "held/terraform-password", "cat": "secrets", "text": "resource \"aws_db_instance\" \"db\" {\n  username = \"admin\"\n  password = \"Pr0d-Passw0rd-2024\"\n}", "expect": ["Pr0d-Passw0rd-2024"], "split": "test"}
+{"id": "held/slack-paste", "cat": "mixed", "text": "Customer says: hi, my email is j.okello@acme.co.ug and the card 5555 5555 5555 4444 was charged twice.\nTracking 1234567890123456 shows nothing.", "expect": ["j.okello@acme.co.ug", "5555 5555 5555 4444"], "split": "test"}
+{"id": "held/neg-k8s-name", "cat": "none", "text": "deployment/orders-api-7d9f8c6b5d-x2k4m is healthy", "expect": [], "split": "test"}
+{"id": "held/neg-docker-tag", "cat": "none", "text": "acme/api:2024.11.4-rc.1 is the release candidate", "expect": [], "split": "test"}
+{"id": "held/neg-prometheus", "cat": "none", "text": "http_requests_total{status=\"200\",handler=\"/v1/orders\"} 1841", "expect": [], "split": "test"}
+{"id": "held/neg-doi", "cat": "none", "text": "doi:10.1000/182.2024.4471 points at the paper", "expect": [], "split": "test"}
+{"id": "held/neg-go-build", "cat": "none", "text": "go1.22.3 build linux/amd64 with cgo disabled", "expect": [], "split": "test"}
+{"id": "held/neg-percent-encoded", "cat": "none", "text": "state=%7B%22page%22%3A2%7D&ref=nav", "expect": [], "split": "test"}
+{"id": "held/neg-git-ssh-remote", "cat": "none", "text": "origin git@github.com:acme/app.git (fetch)", "expect": [], "split": "test"}
+{"id": "held/neg-yaml-anchors", "cat": "none", "text": "defaults: &defaults\n  retries: 3\n  timeout: 15\nprod:\n  <<: *defaults", "expect": [], "split": "test"}
+{"id": "held/neg-csv-totals", "cat": "none", "text": "total,,,1299.00,87.50", "expect": [], "split": "test"}
+{"id": "held/neg-uuid-path", "cat": "none", "text": "GET /v1/objects/550e8400-e29b-41d4-a716-446655440000 200", "expect": [], "split": "test"}
+{"id": "held/neg-math-notation", "cat": "none", "text": "O(n log n) beats O(n^2) for 10,000 rows", "expect": [], "split": "test"}

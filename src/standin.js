@@ -8,7 +8,7 @@
  * MIT licensed.
  */
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.2.0';
 
 /** Categories drive the UI filters and the `categories` option. */
 export const CATEGORIES = {
@@ -209,14 +209,17 @@ export const RULES = [
         const start = m.index;
         const value = trimmed.slice(0, trimmed.length);
         const isHex = /^[0-9a-f]+$/i.test(value);
+        const before = text.slice(Math.max(0, start - 24), start);
+        const secretish = /(?:secret|token|passw|credential|api[_-]?key|private)[\s:=]*$/i.test(before);
         if (isHex) {
+          // 24/32/40/64 hex chars are overwhelmingly hashes and object ids, not secrets
+          if (!secretish && [24, 32, 40, 64].includes(value.length) && /^[0-9a-f]+$/i.test(value)) continue;
           if (!/[0-9]/.test(value) || entropy(value) < 3.0) continue;
         } else {
           const mixed = /[a-z]/.test(value) && /[A-Z]/.test(value) && /\d/.test(value);
           if (!mixed || entropy(value) < 3.6) continue;
         }
         if (/^[\d-]+$/.test(value)) continue; // dates, phone-ish runs
-        const before = text.slice(Math.max(0, start - 24), start);
         if (/(?:commit|sha|hash|revision|rev|blob|tree|digest|etag|base64|data:)[\s:#,]{0,3}$/i.test(before)) continue;
         out.push({ start, end: start + value.length, value });
       }
@@ -247,7 +250,7 @@ export const RULES = [
     'finance',
     'high',
     (text) => {
-      const re = /\b[A-Z]{2}\d{2}(?:[ ]?[A-Z0-9]{4}){1,7}(?:[ ]?[A-Z0-9]{1,4})?\b/g;
+      const re = /\b[A-Z]{2}\d{2}(?:[ ]?[A-Z0-9]{4}){1,7}(?:[ ]?[A-Z0-9]{1,4})?\b/gi;
       const out = [];
       let m;
       while ((m = re.exec(text)) !== null) {
@@ -328,7 +331,9 @@ export const RULES = [
       const v = m[0].trim();
       const d = digits(v);
       if (d.length < 9 || d.length > 15) continue;
-      if (/^\d{4}[-/.]\d{1,2}[-/.]\d{1,2}$/.test(v)) continue; // date
+      if (/^\d{4}[-/.]\d{1,2}[-/.]\d{1,2}(?:[ T]\d{1,2}(?::\d{2})?)?$/.test(v)) continue; // date or timestamp
+      if (/^\d{3}[- ]\d{2}[- ]\d{4}$/.test(v)) continue; // SSN shape, handled by the SSN rule
+      if (!/[1-9]/.test(v)) continue; // 000-00-0000 and friends
       if (/^(?:19|20)\d{2}$/.test(v)) continue;
       if (/^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:\d{1,3})){3}$/.test(v)) continue; // ip
       if (!/[ ().+-]/.test(v)) continue; // bare digits are handled elsewhere

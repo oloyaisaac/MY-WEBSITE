@@ -1,0 +1,27 @@
+{"id":"card/visa-spaces","cat":"finance","text":"card on file 4111 1111 1111 1111, exp 08/27","expect":["4111 1111 1111 1111"]}
+{"id":"card/visa-dashes","cat":"finance","text":"charge 4012-8888-8888-1881 today","expect":["4012-8888-8888-1881"]}
+{"id":"card/mastercard","cat":"finance","text":"the mastercard is 5555555555554444","expect":["5555555555554444"]}
+{"id":"card/amex-15","cat":"finance","text":"amex 378282246310005 is the corporate card","expect":["378282246310005"]}
+{"id":"card/discover","cat":"finance","text":"discover ending 6011111111111117 was used","expect":["6011111111111117"]}
+{"id":"card/diners-14","cat":"finance","text":"diners club 30569309025904 is on the invoice","expect":["30569309025904"]}
+{"id":"card/jcb","cat":"finance","text":"jcb 3530111333300000 for the Tokyo order","expect":["3530111333300000"]}
+{"id":"card/csv-row","cat":"finance","text":"id,name,card,amount\n4471,Grace Achieng,4111111111111111,1299.00","expect":["4111111111111111"]}
+{"id":"card/in-json","cat":"finance","text":"{\"last_payment\": {\"pan\": \"5555 5555 5555 4444\", \"status\": \"declined\"}}","expect":["5555 5555 5555 4444"]}
+{"id":"iban/gb","cat":"finance","text":"refund to GB82 WEST 1234 5698 7654 32 by Friday","expect":["GB82 WEST 1234 5698 7654 32"]}
+{"id":"iban/de","cat":"finance","text":"IBAN DE89 3704 0044 0532 0130 00 for the wire","expect":["DE89 3704 0044 0532 0130 00"]}
+{"id":"iban/fr","cat":"finance","text":"compte FR14 2004 1010 0505 0001 3M02 606","expect":["FR14 2004 1010 0505 0001 3M02 606"]}
+{"id":"iban/nl","cat":"finance","text":"NL91ABNA0417164300 without spaces","expect":["NL91ABNA0417164300"]}
+{"id":"iban/es","cat":"finance","text":"transfer to ES91 2100 0418 4502 0005 1332","expect":["ES91 2100 0418 4502 0005 1332"]}
+{"id":"iban/lowercase","cat":"finance","text":"the account is gb82 west 1234 5698 7654 32","expect":["gb82 west 1234 5698 7654 32"]}
+{"id":"crypto/eth","cat":"finance","text":"send 0.4 ETH to 0x52908400098527886E0F7030069857D2E4169EE7","expect":["0x52908400098527886E0F7030069857D2E4169EE7"]}
+{"id":"crypto/btc-legacy","cat":"finance","text":"btc address 1BoatSLRHtKNngkdXEeobR76b53LETtpyT receives the payout","expect":["1BoatSLRHtKNngkdXEeobR76b53LETtpyT"]}
+{"id":"crypto/btc-bech32","cat":"finance","text":"segwit bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq is the treasury","expect":["bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq"]}
+{"id":"card/email-receipt","cat":"finance","text":"Thanks for your payment of $1,299.00 using Visa ending 4111 1111 1111 1111.","expect":["4111 1111 1111 1111"]}
+{"id":"card/and-iban","cat":"finance","text":"charge 5555555555554444 or wire to DE89 3704 0044 0532 0130 00","expect":["5555555555554444","DE89 3704 0044 0532 0130 00"]}
+{"id":"neg/luhn-invalid-card","cat":"finance","text":"the tracking number 4111111111111112 is on the parcel","expect":[]}
+{"id":"neg/iban-bad-checksum","cat":"finance","text":"GB82 WEST 1234 5698 7654 33 is not a real account","expect":[]}
+{"id":"neg/order-id-16","cat":"finance","text":"order 1234567890123456 confirmed","expect":[]}
+{"id":"neg/prices","cat":"finance","text":"plans start at $29, then $1,299.00 per year, or KES 12,500 monthly","expect":[]}
+{"id":"neg/quantities","cat":"finance","text":"2,400 units at 3.75 each = 9,000.00 before tax","expect":[]}
+{"id":"neg/accounting-ref","cat":"finance","text":"journal entry JE-2024-000871 posted to 4010-1000","expect":[]}
+{"id":"neg/coupon","cat":"finance","text":"use coupon BLACKFRIDAY25 at checkout","expect":[]}

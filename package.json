@@ -1,11 +1,12 @@
 {
   "name": "standin",
-  "version": "0.1.0",
-  "description": "Reversible redaction for text you hand to an LLM. Runs 100% on your device — paste, scrub, ask, restore.",
+  "version": "0.2.0",
+  "description": "An open benchmark corpus and scoring harness for sensitive-data detection in text, with a zero-dependency reference implementation (redact, restore) and a CLI.",
   "type": "module",
   "main": "src/standin.js",
   "exports": {
-    ".": "./src/standin.js"
+    ".": "./src/standin.js",
+    "./corpus": "./bench/lib.mjs"
   },
   "bin": {
     "standin": "bin/standin.mjs"
@@ -13,23 +14,31 @@
   "files": [
     "src/standin.js",
     "bin/standin.mjs",
+    "bench/lib.mjs",
+    "corpus",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "test": "node --test test/",
-    "dev": "node scripts/serve.mjs",
-    "sample": "node bin/standin.mjs examples/sample.txt"
+    "test": "node --test",
+    "bench": "node bench/run.mjs",
+    "bench:verbose": "node bench/run.mjs --verbose",
+    "bench:naive": "node bench/run.mjs --detector bench/adapters/naive.mjs",
+    "bench:ambiguous": "node bench/run.mjs --include-ambiguous",
+    "bench:md": "node bench/run.mjs --markdown",
+    "bench:gate": "node bench/run.mjs --min-precision 0.95 --min-recall 0.9"
   },
   "keywords": [
+    "benchmark",
     "redaction",
     "pii",
+    "pii-detection",
+    "secrets-detection",
     "privacy",
     "llm",
-    "prompt",
-    "secrets",
-    "anonymize",
-    "local-first"
+    "test-corpus",
+    "luhn",
+    "iban"
   ],
   "license": "MIT",
   "engines": {

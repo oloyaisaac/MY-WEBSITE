@@ -1,0 +1,30 @@
+{"id":"email/plain","cat":"contact","text":"ping me at a.mensah@example.co.ug when you land","expect":["a.mensah@example.co.ug"]}
+{"id":"email/plus-tag","cat":"contact","text":"send the invoice to accounts+uganda@acme-logistics.co.ke please","expect":["accounts+uganda@acme-logistics.co.ke"]}
+{"id":"email/uppercase","cat":"contact","text":"Escalations go to GRACE.ACHIENG@ACME.CO.UG and nowhere else.","expect":["GRACE.ACHIENG@ACME.CO.UG"]}
+{"id":"email/subdomain","cat":"contact","text":"the build bot is ci-bot@build.internal.acme.example.org","expect":["ci-bot@build.internal.acme.example.org"]}
+{"id":"email/named-sender","cat":"contact","text":"From: Grace Achieng <grace.achieng@acme-logistics.co.ug>","expect":["grace.achieng@acme-logistics.co.ug"]}
+{"id":"email/in-reply-quote","cat":"contact","text":"> On Tue, 4 Nov 2025 at 09:12, Daniel Okello <dokello@example.com> wrote:\n> the export failed again","expect":["dokello@example.com"]}
+{"id":"email/two-addresses","cat":"contact","text":"cc both ops@acme.co.ug and billing@acme.co.ug on the thread","expect":["ops@acme.co.ug","billing@acme.co.ug"]}
+{"id":"email/mailto-link","cat":"contact","text":"[write to us](mailto:hello@studio-eight.example) any time","expect":["hello@studio-eight.example"]}
+{"id":"email/in-json","cat":"contact","text":"{\"contact\": \"support@acme.co.ug\", \"plan\": \"pro\"}","expect":["support@acme.co.ug"]}
+{"id":"email/trailing-punctuation","cat":"contact","text":"write to info@acme.co.ug, or don't.","expect":["info@acme.co.ug"]}
+{"id":"phone/uganda-e164","cat":"contact","text":"call +256772123456 before noon","expect":["+256772123456"]}
+{"id":"phone/e164-spaced","cat":"contact","text":"call +256 772 123 456 before noon","expect":["+256 772 123 456"]}
+{"id":"phone/us-parens","cat":"contact","text":"front desk: (415) 555-0132","expect":["(415) 555-0132"]}
+{"id":"phone/us-dashes","cat":"contact","text":"front desk: 415-555-0132","expect":["415-555-0132"]}
+{"id":"phone/uk-london","cat":"contact","text":"ring the London office on (020) 7946 0958 tomorrow","expect":["(020) 7946 0958"]}
+{"id":"phone/germany","cat":"contact","text":"Berlin line: +49 30 901820","expect":["+49 30 901820"]}
+{"id":"phone/kenya-mobile","cat":"contact","text":"m-pesa confirmation goes to 0712 345 678","expect":["0712 345 678"]}
+{"id":"phone/kenya-spaced","cat":"contact","text":"call +254 712 345 678 after 5pm","expect":["+254 712 345 678"]}
+{"id":"phone/tanzania","cat":"contact","text":"Dar office: +255 712 345 678","expect":["+255 712 345 678"]}
+{"id":"phone/uganda-local","cat":"contact","text":"mobile 0772 123 456, ask for Grace","expect":["0772 123 456"]}
+{"id":"phone/france","cat":"contact","text":"Paris: +33 1 42 68 53 00","expect":["+33 1 42 68 53 00"]}
+{"id":"phone/india","cat":"contact","text":"+91 98765 43210 is my number","expect":["+91 98765 43210"]}
+{"id":"phone/in-signature","cat":"contact","text":"Grace Achieng\nOperations Lead, Acme Logistics\n+256 772 123 456 | acme-logistics.co.ug","expect":["+256 772 123 456"]}
+{"id":"phone/and-email","cat":"contact","text":"email grace@acme.co.ug or call +256 772 123 456","expect":["grace@acme.co.ug","+256 772 123 456"]}
+{"id":"neg/order-number-8","cat":"contact","text":"order 12345678 shipped on Monday","expect":[]}
+{"id":"neg/sku","cat":"contact","text":"SKU 4457-8890 is out of stock","expect":[]}
+{"id":"neg/localhost-email","cat":"contact","text":"deploy as user@localhost during the demo","expect":[]}
+{"id":"neg/handle-not-email","cat":"contact","text":"follow @acme_logistics on the timeline","expect":[]}
+{"id":"neg/version-and-counts","cat":"contact","text":"version 3.1.4 with 1,284 tests and 17 fixes","expect":[]}
+{"id":"neg/isbn","cat":"contact","text":"ISBN 978-3-16-148410-0 is on the back cover","expect":[]}
